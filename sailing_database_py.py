@@ -14,26 +14,15 @@ sns.set(font='IPAexGothic')
 import pandas as pd
 import streamlit as st
 
-st.title("スプレッドシート解析アプリ")
-st.write("CSVまたはExcelファイルをアップロードしてください。")
+
 
 # ファイルアップロード
-data = st.file_uploader("ファイルを選択", type=["csv", "xls", "xlsx"])
 
-if data is not None:
-    # ファイルの拡張子を確認して読み込む
-    if data.name.endswith(".csv"):
-        df = pd.read_csv(data)
-    else:
-        df = pd.read_excel(data)
+
+
 
     # データの基本情報を表示
-    st.subheader("データの基本情報")
-    st.write(df.info())
 
-    # データの先頭5行を表示
-    st.subheader("データの先頭5行")
-    st.write(df.head())
 
 import pandas as pd
 import matplotlib.pyplot as plt
