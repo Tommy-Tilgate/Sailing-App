@@ -1,4 +1,4 @@
 streamlit
 pandas
 pandas
-japanize matplotlib
+japanize-matplotlib
