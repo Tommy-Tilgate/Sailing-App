@@ -3,3 +3,4 @@ pandas
 pandas
 japanize-matplotlib
 setuptools
+seaborn
