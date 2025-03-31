@@ -28,7 +28,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+data=df
 
 clean_data=data.iloc[:,:12]
 N=clean_data.shape[0]
