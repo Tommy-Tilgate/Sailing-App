@@ -18,7 +18,7 @@ st.title("スプレッドシート解析アプリ")
 st.write("CSVまたはExcelファイルをアップロードしてください。")
 
 # ファイルアップロード
-uploaded_file = st.file_uploader("ファイルを選択", type=["csv", "xls", "xlsx"])
+data = st.file_uploader("ファイルを選択", type=["csv", "xls", "xlsx"])
 
 if uploaded_file is not None:
     # ファイルの拡張子を確認して読み込む
@@ -39,7 +39,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-data=pd.read_csv('ヨット部データベース - 艇速データ.csv')
+
 
 clean_data=data.iloc[:,:12]
 N=clean_data.shape[0]
