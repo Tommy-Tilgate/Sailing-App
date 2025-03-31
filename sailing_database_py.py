@@ -5,7 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import subprocess
 import sys
-
+import japanize_matplotlib
+sns.set(font='IPAexGothic')
 # タイトル
 st.title("Sailing Database Web App")
 
