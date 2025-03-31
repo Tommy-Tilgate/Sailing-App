@@ -20,12 +20,12 @@ st.write("CSVまたはExcelファイルをアップロードしてください�
 # ファイルアップロード
 data = st.file_uploader("ファイルを選択", type=["csv", "xls", "xlsx"])
 
-if uploaded_file is not None:
+if data is not None:
     # ファイルの拡張子を確認して読み込む
-    if uploaded_file.name.endswith(".csv"):
-        df = pd.read_csv(uploaded_file)
+    if data.name.endswith(".csv"):
+        df = pd.read_csv(data)
     else:
-        df = pd.read_excel(uploaded_file)
+        df = pd.read_excel(data)
 
     # データの基本情報を表示
     st.subheader("データの基本情報")
