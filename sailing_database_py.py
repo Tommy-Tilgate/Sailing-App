@@ -25,19 +25,6 @@ if uploaded_file is not None:
     st.dataframe(df)
 
     # スクリプトを実行し、出力を取得
-    with open("temp_input.csv", "w", encoding="utf-8", newline="") as f:
-        df.to_csv(f, index=False)
-
-    result = subprocess.run([sys.executable, "sailing_database_py.py"], capture_output=True, text=True)
-
-    # スクリプトの出力を表示
-    st.write("スクリプトの出力:")
-    st.text(result.stdout)
-
-    # エラーがある場合は表示
-    if result.stderr:
-        st.error("エラーが発生しました:")
-        st.text(result.stderr)
 
 # データクリーニング
 clean_data = df.iloc[:, :12]
