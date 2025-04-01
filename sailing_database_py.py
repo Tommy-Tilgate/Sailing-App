@@ -74,7 +74,7 @@ for i, helmsman in enumerate(helmsman_list):
         personal.iloc[i, j] = np.average(clean_data[(clean_data['helmsman'] == helmsman) & (clean_data['condition'] == condition)]['speed'])
 
 # レーダーチャートの描画関数
-def create_radar_chart(ax, helmsman_data, condition_labels, max_value):
+def create_radar_chart(ax, helmsman_data, condition_labels,min_value, max_value):
     helmsman_data = helmsman_data.fillna(0)
 
     angles = np.linspace(0, 2 * np.pi, len(condition_labels), endpoint=False).tolist()
@@ -88,12 +88,11 @@ def create_radar_chart(ax, helmsman_data, condition_labels, max_value):
     ax.plot(angles, values, marker='o')
     ax.fill(angles, values, alpha=0.25)
     ax.set_thetagrids(np.degrees(angles[:-1]), condition_labels, fontsize=8)
-    ax.set_ylim(1, 3)
+    ax.set_ylim(min_value,max_value)
     ax.set_title(helmsman_data.name, fontsize=10)
 
 # 最大値を取得（全データで統一するため）
-max_value = 3
-min_value=1
+
 
 # 2×3 のグリッドで6つの図を作成
 fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 8), subplot_kw=dict(polar=True))
@@ -101,7 +100,7 @@ fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 8), subplot_kw=dict(pola
 # 各 helmsman についてレーダーチャートを作成
 for ax, helmsman in zip(axes.flat, personal.index[:3]):
     helmsman_data = personal.loc[helmsman]
-    create_radar_chart(ax, helmsman_data, personal.columns, max_value)
+    create_radar_chart(ax, helmsman_data, personal.columns, 2,3)
 
 # Streamlitでプロットを表示
 st.pyplot(fig)
@@ -111,7 +110,7 @@ fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 8), subplot_kw=dict(pola
 
 for ax, helmsman in zip(axes.flat, personal.index[4:]):
     helmsman_data = personal.loc[helmsman]
-    create_radar_chart(ax, helmsman_data, personal.columns, max_value)
+    create_radar_chart(ax, helmsman_data, personal.columns, 1,3)
 
 # Streamlitでプロットを表示
 st.pyplot(fig)
