@@ -21,8 +21,7 @@ if uploaded_file is not None:
         df = pd.read_excel(uploaded_file)
 
     # データの表示
-    st.write("アップロードされたデータ:")
-    st.dataframe(df)
+   
 
     # スクリプトを実行し、出力を取得
 
@@ -55,8 +54,12 @@ for i in range(N):
         if j >= 0:
             clean_data.iloc[i, 7] = clean_data.iloc[j, 7]
 
+
 clean_data = clean_data.dropna(subset=[clean_data.columns[1]])
 clean_data = clean_data.dropna(subset=[clean_data.columns[2]])
+
+st.write("アップロードされたデータ:")
+st.dataframe(clean_data)
 
 # データの個別条件ごとの平均速度を計算
 condition_list = clean_data['condition'].unique()
