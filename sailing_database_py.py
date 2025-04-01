@@ -40,7 +40,7 @@ if uploaded_file is not None:
         st.text(result.stderr)
 
 # データクリーニング
-clean_data = df.iloc[:, :12]
+clean_data = uploaded_file.iloc[:, :12]
 N = clean_data.shape[0]
 for i in range(N):
     if pd.isna(clean_data.iloc[i, 0]):
