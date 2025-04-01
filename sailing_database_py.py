@@ -150,30 +150,34 @@ for condition in clean_data['condition'].unique():
 for condition in clean_data['condition'].unique():
     condition_data = clean_data[clean_data['condition'] == condition]
 
-    # bendとspeedをプロット
-    plt.figure(figsize=(4, 3))
+    # rakeとspeedをプロット
+    plt.figure(figsize=(4,3))  # 図のサイズを指定
     sns.scatterplot(x='bend', y='speed', data=condition_data, s=70)
-    plt.title(f'Condition: {condition}')
-    plt.xlabel('Bend')
-    plt.ylabel('Speed')
+    plt.title(f'Condition: {condition}')  # タイトルにconditionを表示
+    plt.xlabel('Bend')  # x軸ラベル
+    plt.ylabel('Speed')  # y軸ラベル
     plt.grid(True)
 
-    # 2次の多項式回帰
-    coeffs = np.polyfit(condition_data['bend'], condition_data['speed'], 2)
-    poly = np.poly1d(coeffs)
+    try:
+        # 2次の多項式回帰
+        coeffs = np.polyfit(condition_data['bend'], condition_data['speed'], 2)
+        poly = np.poly1d(coeffs)  # 多項式関数を作成
 
-    # 近似曲線をプロット
-    x_vals = np.linspace(min(condition_data['bend']), max(condition_data['bend']), 100)
-    y_vals = poly(x_vals)
-    plt.plot(x_vals, y_vals, color='red', label=f'Fit: y = {coeffs[0]:.2f}x² + {coeffs[1]:.2f}x + {coeffs[2]:.2f}')
+        # 近似曲線をプロット
+        x_vals = np.linspace(min(condition_data['bend']), max(condition_data['bend']), 100)
+        y_vals = poly(x_vals)
+        plt.plot(x_vals, y_vals, color='red', label=f'Fit: y = {coeffs[0]:.2f}x² + {coeffs[1]:.2f}x + {coeffs[2]:.2f}')
 
-    # 最大値の時のXを計算
-    max_x = -coeffs[1] / (2 * coeffs[0])
-    plt.axvline(x=max_x, color='green', linestyle='--', label=f'Max at X = {max_x:.2f}')
+        # 最大値の時のXを計算（2次関数の頂点）
+        max_x = -coeffs[1] / (2 * coeffs[0])  # 頂点のx座標
+        plt.axvline(x=max_x, color='green', linestyle='--', label=f'Max at X = {max_x:.2f}')  # 最大値のXに垂直ラインを引く
 
-    plt.xlabel('Bend')
-    plt.ylabel('Speed')
-    plt.legend()
+    except np.linalg.LinAlgError:
+        print(f"Warning: Polynomial fit did not converge for condition: {condition}")
+    
+    plt.xlabel('Bend')  # x軸ラベル
+    plt.ylabel('Speed')  # y軸ラベル
+    plt.legend()  # グリッドを表示
     st.pyplot(plt)  # Streamlitで表示
     plt.clf()  # 次のプロットのためにクリア
 
@@ -181,24 +185,33 @@ for condition in clean_data['condition'].unique():
 for condition in clean_data['condition'].unique():
     condition_data = clean_data[clean_data['condition'] == condition]
 
-    # tensionとspeedをプロット
-    plt.figure(figsize=(4, 3))
+    # rakeとspeedをプロット
+    plt.figure(figsize=(4,3))  # 図のサイズを指定
     sns.scatterplot(x='tention', y='speed', data=condition_data, s=70)
-    plt.title(f'Condition: {condition}')
-    plt.xlabel('Tention')
-    plt.ylabel('Speed')
+    plt.title(f'Condition: {condition}')  # タイトルにconditionを表示
+    plt.xlabel('Tention')  # x軸ラベル
+    plt.ylabel('Speed')  # y軸ラベル
     plt.grid(True)
 
-    # 2次の多項式回帰
-    coeffs = np.polyfit(condition_data['tention'], condition_data['speed'], 2)
-    poly = np.poly1d(coeffs)
+    try:
+        # 2次の多項式回帰
+        coeffs = np.polyfit(condition_data['tention'], condition_data['speed'], 2)
+        poly = np.poly1d(coeffs)  # 多項式関数を作成
 
-    # 近似曲線をプロット
-    x_vals = np.linspace(min(condition_data['tention']), max(condition_data['tention']), 100)
-    y_vals = poly(x_vals)
-    plt.plot(x_vals, y_vals, color='red', label=f'Fit: y = {coeffs[0]:.2f}x² + {coeffs[1]:.2f}x + {coeffs[2]:.2f}')
+        # 近似曲線をプロット
+        x_vals = np.linspace(min(condition_data['tention']), max(condition_data['tention']), 100)
+        y_vals = poly(x_vals)
+        plt.plot(x_vals, y_vals, color='red', label=f'Fit: y = {coeffs[0]:.2f}x² + {coeffs[1]:.2f}x + {coeffs[2]:.2f}')
 
-    # 最大値の時のXを計算
-    max_x = -coeffs[1] / (2 * coeffs[0])
+        # 最大値の時のXを計算（2次関数の頂点）
+        max_x = -coeffs[1] / (2 * coeffs[0])  # 頂点のx座標
+        plt.axvline(x=max_x, color='green', linestyle='--', label=f'Max at X = {max_x:.2f}')  # 最大値のXに垂直ラインを引く
+
+    except np.linalg.LinAlgError:
+        print(f"Warning: Polynomial fit did not converge for condition: {condition}")
+    
+    plt.xlabel('Tention')  # x軸ラベル
+    plt.ylabel('Speed')  # y軸ラベル
+    plt.legend()  # グリッドを表示
     st.pyplot(plt)  # Streamlitで表示
     plt.clf()  # 次のプロットのためにクリア
