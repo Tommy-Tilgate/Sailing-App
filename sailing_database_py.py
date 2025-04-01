@@ -64,6 +64,8 @@ helmsman_list = clean_data['helmsman'].unique()
 
 personal = pd.DataFrame(columns=condition_list, index=helmsman_list)
 
+st.datahrame(personal)
+
 for i, helmsman in enumerate(helmsman_list):
     for j, condition in enumerate(condition_list):
         personal.iloc[i, j] = np.average(clean_data[(clean_data['helmsman'] == helmsman) & (clean_data['condition'] == condition)]['speed'])
@@ -83,7 +85,7 @@ def create_radar_chart(ax, helmsman_data, condition_labels, max_value):
     ax.plot(angles, values, marker='o')
     ax.fill(angles, values, alpha=0.25)
     ax.set_thetagrids(np.degrees(angles[:-1]), condition_labels, fontsize=8)
-    ax.set_ylim(2, max_value)
+    ax.set_ylim(min_value, max_value)
     ax.set_title(helmsman_data.name, fontsize=10)
 
 # 最大値を取得（全データで統一するため）
