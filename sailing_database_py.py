@@ -67,11 +67,13 @@ helmsman_list = clean_data['helmsman'].unique()
 
 personal = pd.DataFrame(columns=condition_list, index=helmsman_list)
 
-st.dataframe(personal)
+
 
 for i, helmsman in enumerate(helmsman_list):
     for j, condition in enumerate(condition_list):
         personal.iloc[i, j] = np.average(clean_data[(clean_data['helmsman'] == helmsman) & (clean_data['condition'] == condition)]['speed'])
+
+st.dataframe(personal)
 
 # レーダーチャートの描画関数
 def create_radar_chart(ax, helmsman_data, condition_labels,min_value, max_value):
